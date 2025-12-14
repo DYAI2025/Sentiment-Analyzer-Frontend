@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="../assets/img/apple-icon.png"
+    />
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
+    <title>Marker Engine Integration - Text Sentiment</title>
+
+    <!-- Fonts and icons -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+    />
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Files -->
+    <link
+      id="pagestyle"
+      href="../assets/css/material-dashboard.css?v=3.1.0"
+      rel="stylesheet"
+    />
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  </head>
+
+  <body class="g-sidenav-show bg-gray-200">
+    <!-- Sidebar -->
+    <aside
+      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+      id="sidenav-main"
+    >
+      <div class="sidenav-header">
+        <i
+          class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+          aria-hidden="true"
+          id="iconSidenav"
+        ></i>
+        <a class="navbar-brand m-0" href="../index.html">
+          <img
+            src="../assets/img/logo-ct.png"
+            class="navbar-brand-img h-100"
+            alt="main_logo"
+          />
+          <span class="ms-1 font-weight-bold text-white"
+            >Text Sentiment Analyzer</span
+          >
+        </a>
+      </div>
+      <hr class="horizontal light mt-0 mb-2" />
+
+      <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="../index.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">home</i>
+              </div>
+              <span class="nav-link-text ms-1">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-white active bg-gradient-primary"
+              href="./marker-integration.html"
+            >
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">auto_fix_high</i>
+              </div>
+              <span class="nav-link-text ms-1">Marker Integration</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./dashboard.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">dashboard</i>
+              </div>
+              <span class="nav-link-text ms-1">Dashboard</span>
+            </a>
+          </li>
+
+          <li class="nav-item mt-3">
+            <h6
+              class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8"
+            >
+              Account
+            </h6>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./profile.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">person</i>
+              </div>
+              <span class="nav-link-text ms-1">Profile</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./sign-in.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">login</i>
+              </div>
+              <span class="nav-link-text ms-1">Sign In</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./sign-up.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">assignment</i>
+              </div>
+              <span class="nav-link-text ms-1">Sign Up</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
+    >
+      <!-- Navbar -->
+      <nav
+        class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+        id="navbarBlur"
+        data-scroll="true"
+      >
+        <div class="container-fluid py-1 px-3">
+          <nav aria-label="breadcrumb">
+            <ol
+              class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5"
+            >
+              <li class="breadcrumb-item text-sm">
+                <a class="opacity-5 text-dark" href="javascript:;"
+                  >Text Sentiment Analyzer</a
+                >
+              </li>
+              <li
+                class="breadcrumb-item text-sm text-dark active"
+                aria-current="page"
+              >
+                Marker Integration
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </nav>
+
+      <!-- Page Content -->
+      <div class="container-fluid py-4">
+        <!-- Page Header -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-4">
+              <div class="card-body p-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon icon-lg icon-shape bg-gradient-primary shadow text-center border-radius-xl me-3">
+                    <i class="material-icons opacity-10">auto_fix_high</i>
+                  </div>
+                  <div>
+                    <h3 class="mb-1">Marker Engine Integration</h3>
+                    <p class="text-sm mb-0">
+                      Laden Sie Dokumente hoch und analysieren Sie diese in Echtzeit mit Marker Engine und Sentiment Analysis
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header pb-0">
+                <h5>Dokument hochladen</h5>
+                <p class="text-sm">
+                  Unterstützt: PDF, DOCX, DOC, TXT, MD, HTML
+                </p>
+              </div>
+              <div class="card-body">
+                <div id="document-upload-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Processing Status Section -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div id="processing-status-container"></div>
+          </div>
+        </div>
+
+        <!-- Annotations Viewer Section -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div id="annotations-viewer-container"></div>
+          </div>
+        </div>
+
+        <!-- Statistics Row -->
+        <div class="row">
+          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-header p-3 pt-2">
+                <div
+                  class="icon icon-lg icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-xl mt-n4 position-absolute"
+                >
+                  <i class="material-icons opacity-10">description</i>
+                </div>
+                <div class="text-end pt-1">
+                  <p class="text-sm mb-0 text-capitalize">Dokumente</p>
+                  <h4 class="mb-0" id="stats-documents">0</h4>
+                </div>
+              </div>
+              <hr class="dark horizontal my-0" />
+              <div class="card-footer p-3">
+                <p class="mb-0">
+                  <span class="text-sm">Verarbeitet gesamt</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-header p-3 pt-2">
+                <div
+                  class="icon icon-lg icon-shape bg-gradient-primary shadow-primary shadow text-center border-radius-xl mt-n4 position-absolute"
+                >
+                  <i class="material-icons opacity-10">layers</i>
+                </div>
+                <div class="text-end pt-1">
+                  <p class="text-sm mb-0 text-capitalize">Annotations</p>
+                  <h4 class="mb-0" id="stats-annotations">0</h4>
+                </div>
+              </div>
+              <hr class="dark horizontal my-0" />
+              <div class="card-footer p-3">
+                <p class="mb-0">
+                  <span class="text-sm">Insgesamt erstellt</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+              <div class="card-header p-3 pt-2 bg-transparent">
+                <div
+                  class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute"
+                >
+                  <i class="material-icons opacity-10">sentiment_satisfied</i>
+                </div>
+                <div class="text-end pt-1">
+                  <p class="text-sm mb-0 text-capitalize">Ø Sentiment</p>
+                  <h4 class="mb-0" id="stats-sentiment">0.00</h4>
+                </div>
+              </div>
+              <hr class="horizontal my-0 dark" />
+              <div class="card-footer p-3">
+                <p class="mb-0">
+                  <span class="text-sm">Durchschnittlich</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-sm-6">
+            <div class="card">
+              <div class="card-header p-3 pt-2 bg-transparent">
+                <div
+                  class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute"
+                >
+                  <i class="material-icons opacity-10">psychology</i>
+                </div>
+                <div class="text-end pt-1">
+                  <p class="text-sm mb-0 text-capitalize">Analysen</p>
+                  <h4 class="mb-0" id="stats-analyses">0</h4>
+                </div>
+              </div>
+              <hr class="horizontal my-0 dark" />
+              <div class="card-footer p-3">
+                <p class="mb-0">
+                  <span class="text-sm">Durchgeführt</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer py-4 mt-4">
+          <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6 mb-lg-0 mb-4">
+                <div
+                  class="copyright text-center text-sm text-muted text-lg-start"
+                >
+                  Copyright ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  Marker Engine Integration
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <!-- Core JS Files -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+    <!-- Supabase Configuration -->
+    <script src="../assets/js/config/supabase.config.js"></script>
+
+    <!-- Services -->
+    <script src="../assets/js/services/marker-engine.service.js"></script>
+    <script src="../assets/js/services/realtime-annotations.service.js"></script>
+
+    <!-- Components -->
+    <script src="../assets/js/components/document-upload.component.js"></script>
+    <script src="../assets/js/components/processing-status.component.js"></script>
+    <script src="../assets/js/components/annotations-viewer.component.js"></script>
+
+    <!-- Main App -->
+    <script src="../assets/js/app/marker-integration.app.js"></script>
+
+    <!-- Material Dashboard -->
+    <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+
+    <!-- Initialization Script -->
+    <script>
+      // Scrollbar initialization
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+
+      // Initialize app when ready
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page loaded, initializing Marker Integration App...');
+
+        // Make upload component globally accessible
+        window.documentUpload = null;
+        window.processingStatus = null;
+        window.annotationsViewer = null;
+
+        // Listen for app initialization
+        setTimeout(() => {
+          if (window.markerApp && window.markerApp.isReady()) {
+            console.log('✓ Marker Integration App is ready');
+
+            // Store component references
+            window.documentUpload = window.markerApp.uploadComponent;
+            window.processingStatus = window.markerApp.statusComponent;
+            window.annotationsViewer = window.markerApp.annotationsViewer;
+          }
+        }, 1000);
+      });
+
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', function() {
+        if (window.markerApp) {
+          window.markerApp.cleanup();
+        }
+      });
+    </script>
+  </body>
+</html>
